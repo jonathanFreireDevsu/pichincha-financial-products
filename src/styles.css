@@ -1,1 +1,71 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+nav {
+    /* background-color: blue; */
+    text-align: center;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+table {
+    color: #76767a;
+}
+
+th {
+    padding: 10px 10px;
+    font-size: 15px;
+}
+
+td {
+    text-align: center;
+    font-size: 13px;
+}
+
+.button-primary {
+    background: #FFDD00;
+    font-size: 14px;
+    color: #0F265C;
+    padding: 12px 24px;
+    border-radius: 4px;
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: none;
+    border: none;
+    font-weight: bold;
+    text-align: center;
+    border: 0;
+    min-width: 120px;
+    box-sizing: border-box;
+    height: 48px;
+    cursor: pointer;
+}
+
+.button-secondary {
+    background: #E9ECF3;
+    font-size: 14px;
+    color: #0F265C;
+    padding: 12px 24px;
+    border-radius: 4px;
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: none;
+    border: none;
+    font-weight: bold;
+    text-align: center;
+    border: 0;
+    min-width: 120px;
+    box-sizing: border-box;
+    height: 48px;
+    cursor: pointer;
+}

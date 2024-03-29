@@ -1,0 +1,10 @@
+<div class="modal">
+  <div class="card modal__card">
+    <p>{{ modalText }}.</p>
+    <div class="modal__buttons">
+      <button class="button-secondary" (click)="closeModal()">Cancelar</button>
+      <div class="mt-2"></div>
+      <button class="button-primary" (click)="handleDeleteItem(modalId)">Confirmar</button>
+    </div>
+  </div>
+</div>
