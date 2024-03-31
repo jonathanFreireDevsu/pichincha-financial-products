@@ -1,6 +1,6 @@
 body {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0px;
     padding: 0px;
     font-family: Arial, Helvetica, sans-serif;
@@ -32,11 +32,27 @@ td {
     font-size: 13px;
 }
 
+hr {
+    width: 100%;
+    border-color: #fff;
+}
+
+input {
+    box-shadow: none;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+    height: 40px;
+    font-size: 14px;
+    padding: 0px 8px;
+    outline:none;
+    min-width: 200px;
+}
+
 .button-primary {
     background: #FFDD00;
     font-size: 14px;
     color: #0F265C;
-    padding: 12px 24px;
+    padding: 6px;
     border-radius: 4px;
     display: inline-block;
     text-decoration: none;
@@ -44,10 +60,9 @@ td {
     border: none;
     font-weight: bold;
     text-align: center;
-    border: 0;
     min-width: 120px;
     box-sizing: border-box;
-    height: 48px;
+    height: 42px;
     cursor: pointer;
 }
 
@@ -55,7 +70,7 @@ td {
     background: #E9ECF3;
     font-size: 14px;
     color: #0F265C;
-    padding: 12px 24px;
+    padding: 6px;
     border-radius: 4px;
     display: inline-block;
     text-decoration: none;
@@ -63,9 +78,26 @@ td {
     border: none;
     font-weight: bold;
     text-align: center;
-    border: 0;
     min-width: 120px;
     box-sizing: border-box;
-    height: 48px;
+    height: 42px;
     cursor: pointer;
+}
+
+.app-screen {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    background-color: #fff;
+    width: auto;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 35px 0px;
+    padding: 30px;
+
 }

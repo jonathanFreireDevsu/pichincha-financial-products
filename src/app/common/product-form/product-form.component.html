@@ -1,0 +1,110 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="product_form__form-container">
+        <app-input-form
+            formControlName="id"
+            title="ID"
+            [errorMessage]="getErrorMessage('id')"
+        />
+        <app-input-form
+            formControlName="name"
+            title="Nombre"
+            [errorMessage]="getErrorMessage('name')"
+        />
+        <app-input-form
+            formControlName="description"
+            title="Descripción"
+            [errorMessage]="getErrorMessage('description')"
+        />
+        <app-input-form
+            formControlName="logo"
+            title="Logo"
+            [errorMessage]="getErrorMessage('logo')"
+        />
+        <app-input-form
+            type="date"
+            formControlName="date_release"
+            title="Fecha liberación"
+            [errorMessage]="getErrorMessage('date_release')"
+        />
+        <app-input-form
+            type="date"
+            formControlName="date_revision"
+            title="Fecha revisión"
+            [errorMessage]="getErrorMessage('date_revision')"
+        />
+    </div>
+    <div class="product_form__buttons-container">
+        <button
+            type="submit"
+            class="button-secondary"
+            (click)="onReset()">Reiniciar</button
+        >
+        <button
+            class="button-primary"
+            type="submit"
+        >
+            Enviar
+        </button>
+    </div>
+</form>
+
+<!-- 
+<div class="product_form__form-container">
+    <app-input-form
+        formControlName="name"
+        title="ID"
+        [error]="formState.id.error"
+        [value]="formState.id.value"
+        id="id"
+        
+    />
+    <app-input-form
+        formControlName="name"
+        title="Nombre"
+        [error]="formState.name.error"
+        [value]="formState.name.value"
+        id="name"
+        
+    />
+    <app-input-form
+        formControlName="name"
+        title="Descripción"
+        [error]="formState.description.error"
+        [value]="formState.description.value"
+        id="description"
+        
+    />
+    <app-input-form
+        formControlName="name"
+        title="Logo"
+        [error]="formState.logo.error"
+        [value]="formState.logo.value"
+        id="logo"
+        
+    />
+    <app-input-form
+        formControlName="name"
+        title="Fecha liberación"
+        [error]="formState.date_release.error"
+        [value]="formState.date_release.value"
+        id="date_release"
+        
+    />
+    <app-input-form
+        formControlName="name"
+        title="Fecha revisión"
+        [error]="formState.date_revision.error"
+        [value]="formState.date_revision.value"
+        id="date_revision"
+        
+    />
+</div>
+<div class="product_form__buttons-container">
+    <button class="button-secondary">Reiniciar</button>
+    <button
+        class="button-primary"
+        (click)="onSubmit()"
+    >
+        Enviar
+    </button>
+</div> -->

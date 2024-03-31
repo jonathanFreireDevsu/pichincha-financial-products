@@ -1,8 +1,15 @@
-<div class="main-screen">
-    <div class="main__products-list">
+<div class="app-screen">
+    <div class="container">
         <div class="main__actions-container">
-            <input type="text" class="main__input-search" />
-            <button class="button-primary">
+            <input
+                type="text"
+                (keyup)='onSearch($event)'
+                placeholder="Buscar..."
+            />
+            <button
+                class="button-primary"
+                (click)="onAdd()"
+            >
                 Agregar
             </button>
         </div>
@@ -14,69 +21,26 @@
                     <th>Descripción</th>
                     <th>Fecha de liberación</th>
                     <th>Fecha de reestructuración</th>
-                    <th>BORRAR</th>
+                    <th></th>
                 </tr>
-                <tr>
-                    <td><img class="main__table-icon" src='./../assets/notAvailable.png' /></td>
-                    <td>Producto 1</td>
-                    <td>Este producto tiene una descripción muy larga</td>
-                    <td>01/01/2024</td>
-                    <td>01/01/2024</td>
-                    <!-- <td><img class="main__action-icon" src='./../assets/3dots.svg' /></td> -->
+                <tr *ngFor='let product of splittedProducts[currPage]'>
                     <td>
-                        <div class="main__action-options">
-                            <img class="main__action-icon" src='./../assets/3dots.svg' />
-                            <div class="main__options-content">
-                              <span> Actualizar item </span>
-                              <span> Eliminar item </span>
-                            </div>
-                        </div>
+                        <img
+                            class="main__table-icon"
+                            src={{product.logo}}
+                            (error)="onImageError($event)"
+                        />
                     </td>
-                </tr>
-                <tr>
-                    <td><img class="main__table-icon" src='./../assets/notAvailable.png' /></td>
-                    <td>Producto 1</td>
-                    <td>Este producto tiene una descripción muy larga Este producto tiene una descripción muy larga Este producto tiene una descripción muy larga Este producto tiene una descripción muy larga Este producto tiene una descripción muy larga Este producto tiene una descripción muy larga</td>
-                    <td>01/01/2024</td>
-                    <td>01/01/2024</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.date_release && product.date_release.substring(0,10)}}</td>
+                    <td>{{product.date_revision && product.date_revision.substring(0,10)}}</td>
                     <td>
                         <div class="main__action-options">
                             <img class="main__action-icon" src='./../assets/3dots.svg' />
                             <div class="main__options-content">
-                              <span> Actualizar item </span>
-                              <span> Eliminar item </span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><img class="main__table-icon" src='./../assets/notAvailable.png' /></td>
-                    <td>Producto 1</td>
-                    <td>Este producto tiene una descripción muy larga</td>
-                    <td>01/01/2024</td>
-                    <td>01/01/2024</td>
-                    <td>
-                        <div class="main__action-options">
-                            <img class="main__action-icon" src='./../assets/3dots.svg' />
-                            <div class="main__options-content">
-                              <span> Actualizar item </span>
-                              <span> Eliminar item </span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><img class="main__table-icon" src='./../assets/notAvailable.png' /></td>
-                    <td>Producto 1</td>
-                    <td>Este producto tiene una descripción muy larga</td>
-                    <td>01/01/2024</td>
-                    <td>01/01/2024</td>
-                    <td>
-                        <div class="main__action-options">
-                            <img class="main__action-icon" src='./../assets/3dots.svg' />
-                            <div class="main__options-content">
-                              <span> Actualizar item </span>
-                              <span> Eliminar item </span>
+                              <span (click)="onUpdate(product.id)">Actualizar item</span>
+                              <span (click)="onDelete(product.id)">Eliminar item</span>
                             </div>
                         </div>
                     </td>
@@ -84,18 +48,32 @@
             </table>
         </div>
         <div class="main__table-bottom-container">
-            <div class="">5 Resultados</div>
+            <div>
+                {{products.length || 0}} Resultado{{products.length === 1? '' : 's'}}
+            </div>
+            <div class="main__change-page" *ngIf="products.length > itemsPerPage">
+                <img
+                    class="main__care-icon" src='./../assets/caretLeft.svg'
+                    (click)='onChangePage(-1)'    
+                />
+                <img
+                    class="main__care-icon"
+                    src='./../assets/caretRight.svg'
+                    (click)='onChangePage(1)' 
+                />
+            </div>
             <div class="main__action-options">
                 <div class="main__dropdown-text">
-                    <span>5</span>
-                    <img class="care_down-icon" src='./../assets/caretDown.svg' />
+                    <span>{{itemsPerPage}}</span>
+                    <img class="main__care_down-icon" src='./../assets/caretDown.svg' />
                 </div>
                 <div class="main__options-content">
-                    <span>5</span>
-                    <span>10</span>
-                    <span>20</span>
+                    <span (click)='onSplitData(5, products)'>5</span>
+                    <span (click)='onSplitData(10, products)'>10</span>
+                    <span (click)='onSplitData(20, products)'>20</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- <app-confirm-modal /> -->

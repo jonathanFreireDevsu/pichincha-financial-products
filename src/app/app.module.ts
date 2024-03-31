@@ -3,24 +3,35 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import { RouterModule } from '@angular/router';
+import { AddProductScreenComponent } from './add-product-screen/add-product-screen.component';
+import { EditProductScreenComponent } from './edit-product-screen/edit-product-screen.component';
+import { InputFormComponent } from './common/input-form/input-form.component';
+import { ProductFormComponent } from './common/product-form/product-form.component';
+import { ConfirmModalComponent } from './confirmModal/confirmModal.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainScreenComponent
+    MainScreenComponent,
+    AddProductScreenComponent,
+    EditProductScreenComponent,
+    InputFormComponent,
+    ProductFormComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    // RouterModule.forRoot([
-    //   {path: '', component: MainViewComponent},
-    //   {path: 'agregar-producto', component: AddProductViewComponent},
-    //   {path: 'editar-producto', component: EditProductViewComponent},
-    // ])
+    RouterModule.forRoot([
+      {path: '', component: MainScreenComponent},
+      {path: 'agregar', component: AddProductScreenComponent},
+      {path: 'editar', component: EditProductScreenComponent},
+    ])
   ],
   // exports: [RouterModule],
   providers: [],

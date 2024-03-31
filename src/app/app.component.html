@@ -1,8 +1,14 @@
 <div class="app" role="banner">
   <nav>
-    <img class="logo" src='./../assets/banklogo.png' />
+    <img
+      class="logo"
+      src='./../assets/banklogo.png'
+      (click)="handleClick()"
+    />
   </nav>
   <div class="content">
-    <app-main-screen></app-main-screen>
+    <router-outlet />
+    <!-- <app-main-screen /> -->
+    <!-- <app-add-product-screen /> -->
   </div>
 </div>

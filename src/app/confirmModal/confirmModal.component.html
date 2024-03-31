@@ -1,9 +1,9 @@
-<div class="modal">
-  <div class="card modal__card">
-    <p>{{ modalText }}.</p>
-    <div class="modal__buttons">
+<div class="confirm-modal">
+  <div class="container confirm-modal__card">
+    <p> {{ modalText }}. </p>
+    <div class="confirm-modal__buttons">
       <button class="button-secondary" (click)="closeModal()">Cancelar</button>
-      <div class="mt-2"></div>
+      <div class="sep-button"></div>
       <button class="button-primary" (click)="handleDeleteItem(modalId)">Confirmar</button>
     </div>
   </div>

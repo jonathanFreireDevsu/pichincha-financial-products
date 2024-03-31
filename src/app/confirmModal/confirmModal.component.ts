@@ -10,8 +10,9 @@ export class ConfirmModalComponent implements OnInit {
   constructor(
     private confirmModalService: ConfirmModalService,
   ) {}
-  modalText= '';
-  modalId= '';
+  modalText = '';
+  modalId = '';
+  
   closeModal() {
     this.confirmModalService.closeModal();
   }

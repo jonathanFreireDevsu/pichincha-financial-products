@@ -1,20 +1,22 @@
-.modal {
+.confirm-modal {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     position: absolute;
+    left: 0;
+    top: 0;
     background-color: rgba(0, 0, 0, 0.46);
     z-index: 2000;
     overflow: hidden;
 }
 
-.modal__card {
+.confirm-modal__card {
     position: absolute;
-    width: 40%;
+    width: 50%;
     top: 25%;
-    left: 30%;
+    left: 25%;
 }
 
-.modal__buttons {
+.confirm-modal__buttons {
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -23,4 +25,9 @@
     padding: 0px;
     padding-top: 20px;
 
+}
+
+.sep-button {
+    height: 100%;
+    width: 20px;
 }

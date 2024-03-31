@@ -1,0 +1,13 @@
+.product_form__form-container {
+    display: flex;
+    width: 500px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.product_form__buttons-container {
+    padding-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
