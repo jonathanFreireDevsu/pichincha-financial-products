@@ -1,20 +1,13 @@
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { mockDeclarations } from './../utils/mockDeclarations';
+import { ConfirmModalComponent } from './confirmModal.component';
 
-// import { ConfirmModalComponent } from './confirmModal.component';
-// import { ConfirmMockDeclarations } from '../constants/initAngularModule';
+describe('AppComponent', () => {
+  beforeEach(() => TestBed.configureTestingModule(mockDeclarations));
 
-// describe('ModalComponent', () => {
-//   let component: ConfirmModalComponent;
-//   let fixture: ComponentFixture<ConfirmModalComponent>;
-
-//   beforeEach(() => {
-//     TestBed.configureTestingModule(ConfirmMockDeclarations);
-//     fixture = TestBed.createComponent(ConfirmModalComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
-
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(ConfirmModalComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+});

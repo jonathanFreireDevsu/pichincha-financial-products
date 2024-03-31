@@ -76,4 +76,10 @@
         </div>
     </div>
 </div>
-<!-- <app-confirm-modal /> -->
+<app-confirm-modal
+    *ngIf="confirmModalData.modalVisible"
+    [modalText]="confirmModalData.modalText"
+    [modalId]="confirmModalData.modalId"
+    (notifyViewModal)="handleModalVisibility($event)"
+    (notifyUpdateData)="loadData()"
+/>

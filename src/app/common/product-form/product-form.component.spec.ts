@@ -1,21 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
+import { mockDeclarations } from './../../utils/mockDeclarations';
 import { ProductFormComponent } from './product-form.component';
 
-describe('ProductFormComponent', () => {
-  let component: ProductFormComponent;
-  let fixture: ComponentFixture<ProductFormComponent>;
+describe('AppComponent', () => {
+  beforeEach(() => TestBed.configureTestingModule(mockDeclarations));
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [ProductFormComponent]
-    });
-    fixture = TestBed.createComponent(ProductFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(ProductFormComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
   });
 });

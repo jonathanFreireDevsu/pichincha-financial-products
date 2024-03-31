@@ -21,6 +21,8 @@ export class InputFormComponent implements ControlValueAccessor {
   @Input() title: string = '';
   @Input() errorMessage: string = '';
   @Input() type: string | undefined= 'text';
+  @Input() disabled: boolean | undefined = false;
+
   
   value: string = '';
   onChange: any = () => {};
@@ -50,12 +52,4 @@ export class InputFormComponent implements ControlValueAccessor {
   onBlur() {
     this.onTouched();
   }
-
-  // handleChangeq() {
-  //   this.notify.emit({id: this.id, value: this.value})
-  // }
-
-  // ngOnInit() {
-  //   this.title = '';
-  // }
 }

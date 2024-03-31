@@ -5,24 +5,9 @@
         [value]="value"
         (input)="updateValue($event)"
         (blur)="onBlur()"
+        [disabled]="disabled"
     >
     <div class="input-form__error">
         {{errorMessage || '&nbsp;'}}
     </div>
 </div>
-
-<!-- <div class="input-form__container">
-    <div class="input-form__label"> {{title}} </div>
-    <input
-        class="{{control.invalid ? 'input__error' : 'input__input'}}"
-    />
-    <div
-        ngDefaultControl
-        type="text"
-        class="input-form__error"
-        (input)="handleChangeq()"
-        [(ngModel)]="value"
-    >
-        {{error || '&nbsp;'}}
-    </div>
-</div> -->

@@ -1,21 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
+import { mockDeclarations } from './../utils/mockDeclarations';
 import { AddProductScreenComponent } from './add-product-screen.component';
 
-describe('AddProductScreenComponent', () => {
-  let component: AddProductScreenComponent;
-  let fixture: ComponentFixture<AddProductScreenComponent>;
+describe('AppComponent', () => {
+  beforeEach(() => TestBed.configureTestingModule(mockDeclarations));
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [AddProductScreenComponent]
-    });
-    fixture = TestBed.createComponent(AddProductScreenComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AddProductScreenComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
   });
 });

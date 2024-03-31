@@ -1,21 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
+import { mockDeclarations } from './../utils/mockDeclarations';
 import { MainScreenComponent } from './main-screen.component';
 
-describe('MainScreenComponent', () => {
-  let component: MainScreenComponent;
-  let fixture: ComponentFixture<MainScreenComponent>;
+describe('AppComponent', () => {
+  beforeEach(() => TestBed.configureTestingModule(mockDeclarations));
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [MainScreenComponent]
-    });
-    fixture = TestBed.createComponent(MainScreenComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(MainScreenComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
   });
 });

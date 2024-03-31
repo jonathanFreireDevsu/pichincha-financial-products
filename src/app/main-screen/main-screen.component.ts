@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../types/products';
 import { Router } from '@angular/router';
+import { ProductsService } from '../services/products.service';
+import { IConfirmModal } from '../types/modal';
 
 @Component({
   selector: 'app-main-screen',
@@ -10,6 +12,7 @@ import { Router } from '@angular/router';
 export class MainScreenComponent implements OnInit {
   constructor (
     private router: Router,
+    private productsService: ProductsService,
   ) {
 
   }
@@ -19,6 +22,18 @@ export class MainScreenComponent implements OnInit {
   itemsPerPage = 5
   currPage = 0
 
+  confirmModalData : IConfirmModal = {
+    modalVisible: false,
+    modalText: '',
+    modalId: '',
+  }
+
+  handleModalVisibility (value: boolean) {
+    this.confirmModalData = {
+      ...this.confirmModalData,
+      modalVisible: value,
+    }
+  }
   onImageError(event: any) {
     event.target.src = './../assets/notAvailable.png';
   }
@@ -26,19 +41,25 @@ export class MainScreenComponent implements OnInit {
   onAdd() {
     this.router.navigate(['agregar']);
   }
-  onUpdate(productId: String) {
-    console.log(productId);
+  onUpdate(productId: string) {
+    const currentProduct = this.products.find(product => product.id === productId);
+    this.productsService.setCurrentProduct(currentProduct);
+    this.router.navigate(['editar/', productId])
   }
 
-  onDelete(productId: String) {
-    console.log(productId);
+  onDelete(productId: string) {
+    const currentProduct = this.products.find(product => product.id === productId);
+    this.productsService.setCurrentProduct(currentProduct);
+    this.confirmModalData = {
+      modalVisible: true,
+      modalText: currentProduct?.name || '',
+      modalId: currentProduct?.id || '',
+    }
   }
 
   onChangePage(value: number) {
     const tempPage = this.currPage + value;
-    // console.log(tempPage, this.splittedProducts.length);
     if (tempPage <= this.splittedProducts.length -1 && tempPage >= 0) {
-      console.log('me actualizo');
       this.currPage = tempPage;
     }
   }
@@ -53,14 +74,12 @@ export class MainScreenComponent implements OnInit {
         splittedData[(Math.floor(index / itemsPerPage))].push(product);
       }
     })
-    // console.log(splittedData);
     this.currPage = 0;
     this.splittedProducts = splittedData
   }
 
   onSearch (event: any) {
     const value = event.target.value;
-    console.log(value);
     if (!value) {
       this.onSplitData(this.itemsPerPage, this.products);
       return;
@@ -76,66 +95,20 @@ export class MainScreenComponent implements OnInit {
     this.onSplitData(this.itemsPerPage, prevResult);
   }
 
+  loadData() {
+    this.productsService.getItems().subscribe(
+      (data) => {
+        this.products = data;
+        this.onSplitData(this.itemsPerPage, data)
+      },
+      (error) => {
+        console.error('Hubo un error', error);
+      }
+    );
+  }
+
   ngOnInit(): void {
-    const dataFromEndpoint = [ 
-      {
-        "id": "trj-cdr",
-        "name": "Tarjeta de débito",
-        "description": "Esta tarjeta sirve para comprar cosas a crédito.",
-        "logo": "https://latam.mastercard.com/content/dam/public/mastercardcom/lac/mx/home/consumidores/encontrar-una-tarjeta/tarjetas-de-credito/tarjeta-gold/tarjeta-credito-gold-1280x720.jpg",
-        "date_release": "2023-02-01T00:00:00.000+00:00",
-        "date_revision": "2023-02-01T00:00:00.000+00:00"
-      },
-      {
-        "id": "trj-cdr",
-        "name": "Tarjeta de crédito",
-        "description": "Esta tarjeta sirve para comprar cosas a crédito.",
-        "logo": "https://latam.rdcom/lac/mx/home/consumidtarjeta/tarjetas-de-credito/tarjeta-gold/tarjeta-credito-gold-1280x720.jpg",
-        "date_release": "2023-02-01T00:00:00.000+00:00",
-        "date_revision": "2023-02-01T00:00:00.000+00:00"
-      },
-      {
-        "id": "trj-cdr",
-        "name": "Prestamo",
-        "description": "Esta tarjeta sirve para comprar cosas a crédito.",
-        "logo": "https://latam.mastercaac/mx/home/consumidores/encontrar-una-tarjeta/tarjetas-de-credito/tarjeta-gold/tarjeta-credito-gold-1280x720.jpg",
-        "date_release": "2023-02-01T00:00:00.000+00:00",
-        "date_revision": "2023-02-01T00:00:00.000+00:00"
-      },
-      {
-        "id": "trj-cdr",
-        "name": "Sistema",
-        "description": "Esta tarjeta sirve para comprar cosas a crédito.",
-        "logo": "https://latam.mastercard.com/content/dam/public/mastercardcom/lac/mx/home/consumidores/encontrar-una-tarjeta/tarjetas-de-credito/tarjeta-gold/tarjeta-credito-gold-1280x720.jpg",
-        "date_release": "2023-02-01T00:00:00.000+00:00",
-        "date_revision": "2023-02-01T00:00:00.000+00:00"
-      },
-      {
-        "id": "trj-cdr",
-        "name": "Tarjeta de crédito",
-        "description": "Esta tarjeta sirve para comprar cosas a crédito.",
-        "logo": "https://latam.rdcom/lac/mx/home/consumidtarjeta/tarjetas-de-credito/tarjeta-gold/tarjeta-credito-gold-1280x720.jpg",
-        "date_release": "2023-02-01T00:00:00.000+00:00",
-        "date_revision": "2023-02-01T00:00:00.000+00:00"
-      },
-      {
-        "id": "trj-cdr",
-        "name": "Tarjeta de crédito",
-        "description": "Esta tarjeta sirve para comprar cosas a crédito.",
-        "logo": "https://latam.mastercaac/mx/home/consumidores/encontrar-una-tarjeta/tarjetas-de-credito/tarjeta-gold/tarjeta-credito-gold-1280x720.jpg",
-        "date_release": "2023-02-01T00:00:00.000+00:00",
-        "date_revision": "2023-02-01T00:00:00.000+00:00"
-      },
-      {
-        "id": "trj-cdr",
-        "name": "Tarjeta de crédito",
-        "description": "Esta tarjeta sirve para comprar cosas a crédito.",
-        "logo": "https://latam.mastercard.com/content/dam/public/mastercardcom/lac/mx/home/consumidores/encontrar-una-tarjeta/tarjetas-de-credito/tarjeta-gold/tarjeta-credito-gold-1280x720.jpg",
-        "date_release": "2023-02-01T00:00:00.000+00:00",
-        "date_revision": "2023-02-01T00:00:00.000+00:00"
-      },
-    ];
-    this.products = dataFromEndpoint;
-    this.onSplitData(this.itemsPerPage, dataFromEndpoint)
+    this.productsService.setCurrentProduct(undefined);
+    this.loadData();
   }
 }

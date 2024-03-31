@@ -1,10 +1,10 @@
 <div class="confirm-modal">
   <div class="container confirm-modal__card">
-    <p> {{ modalText }}. </p>
+    <p> Está seguro de eliminar el producto {{ modalText }}. </p>
     <div class="confirm-modal__buttons">
       <button class="button-secondary" (click)="closeModal()">Cancelar</button>
       <div class="sep-button"></div>
-      <button class="button-primary" (click)="handleDeleteItem(modalId)">Confirmar</button>
+      <button class="button-primary" (click)="handleDeleteItem()">Confirmar</button>
     </div>
   </div>
 </div>

@@ -1,27 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { ConfirmModalService } from './confirmModal.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ProductsService } from '../services/products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-confirm-modal',
   templateUrl: './confirmModal.component.html',
   styleUrls: ['./confirmModal.component.css'],
 })
-export class ConfirmModalComponent implements OnInit {
+export class ConfirmModalComponent {
   constructor(
-    private confirmModalService: ConfirmModalService,
+    private productsService: ProductsService,
+    private router: Router
   ) {}
-  modalText = '';
-  modalId = '';
-  
+  @Input() modalText: string = '';
+  @Input() modalId: string = '';
+  @Output() notifyViewModal = new EventEmitter<boolean>();
+  @Output() notifyUpdateData = new EventEmitter<null>();
+
   closeModal() {
-    this.confirmModalService.closeModal();
+    this.notifyViewModal.emit(false);
   }
 
-  handleDeleteItem(id: string) {
+  openModal() {
+    this.notifyViewModal.emit(true);
   }
 
-  ngOnInit() {
-    this.modalText = this.confirmModalService.getModalText();
-    this.modalId = this.confirmModalService.getModalId();
+  updateData() {
+    this.notifyUpdateData.emit();
+  }
+
+  handleDeleteItem() {
+    this.productsService.deleteItem(this.modalId).subscribe(
+      (_) => {
+        this.updateData();
+        this.closeModal()
+      },
+      (error) => {
+        console.error('Hubo un error', error);
+      }
+    );
   }
 };

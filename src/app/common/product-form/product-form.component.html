@@ -4,6 +4,7 @@
             formControlName="id"
             title="ID"
             [errorMessage]="getErrorMessage('id')"
+            [disabled]="this.screenMode === 'update'"
         />
         <app-input-form
             formControlName="name"
@@ -47,64 +48,3 @@
         </button>
     </div>
 </form>
-
-<!-- 
-<div class="product_form__form-container">
-    <app-input-form
-        formControlName="name"
-        title="ID"
-        [error]="formState.id.error"
-        [value]="formState.id.value"
-        id="id"
-        
-    />
-    <app-input-form
-        formControlName="name"
-        title="Nombre"
-        [error]="formState.name.error"
-        [value]="formState.name.value"
-        id="name"
-        
-    />
-    <app-input-form
-        formControlName="name"
-        title="Descripción"
-        [error]="formState.description.error"
-        [value]="formState.description.value"
-        id="description"
-        
-    />
-    <app-input-form
-        formControlName="name"
-        title="Logo"
-        [error]="formState.logo.error"
-        [value]="formState.logo.value"
-        id="logo"
-        
-    />
-    <app-input-form
-        formControlName="name"
-        title="Fecha liberación"
-        [error]="formState.date_release.error"
-        [value]="formState.date_release.value"
-        id="date_release"
-        
-    />
-    <app-input-form
-        formControlName="name"
-        title="Fecha revisión"
-        [error]="formState.date_revision.error"
-        [value]="formState.date_revision.value"
-        id="date_revision"
-        
-    />
-</div>
-<div class="product_form__buttons-container">
-    <button class="button-secondary">Reiniciar</button>
-    <button
-        class="button-primary"
-        (click)="onSubmit()"
-    >
-        Enviar
-    </button>
-</div> -->
