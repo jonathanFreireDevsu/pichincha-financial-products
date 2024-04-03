@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../types/products';
+import { Product } from '../../types/products';
 import { Router } from '@angular/router';
-import { ProductsService } from '../services/products.service';
-import { IModal } from '../types/modal';
-import { NotificationService } from '../notification/notification.service';
-import { ModalService } from '../modal/modal.service';
+import { ProductsService } from '../../services/products.service';
+import { NotificationService } from '../../components/notification/notification.service';
+import { ModalService } from '../../components/modal/modal.service';
+import { ProductStateService } from 'src/app/services/product-state.service';
 
 @Component({
   selector: 'app-main-screen',
@@ -16,7 +16,8 @@ export class MainScreenComponent implements OnInit {
     private router: Router,
     private productsService: ProductsService,
     private notificationService: NotificationService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private productStateService: ProductStateService,
   ) {
 
   }
@@ -26,18 +27,6 @@ export class MainScreenComponent implements OnInit {
   itemsPerPage = 5
   currPage = 0
 
-  // confirmModalData : IModal = {
-  //   modalVisible: false,
-  //   modalText: '',
-  //   modalId: '',
-  // }
-
-  // handleModalVisibility (value: boolean) {
-  //   this.confirmModalData = {
-  //     ...this.confirmModalData,
-  //     modalVisible: value,
-  //   }
-  // }
   onImageError(event: any) {
     event.target.src = './../assets/notAvailable.png';
   }
@@ -46,8 +35,8 @@ export class MainScreenComponent implements OnInit {
     this.router.navigate(['agregar']);
   }
   onUpdate(productId: string) {
-    const currentProduct = this.products.find(product => product.id === productId);
-    this.productsService.setCurrentProduct(currentProduct);
+    const selectedProduct = this.products.find(product => product.id === productId);
+    this.productStateService.setSelectedProduct(selectedProduct);
     this.router.navigate(['editar/', productId])
   }
 
@@ -71,11 +60,11 @@ export class MainScreenComponent implements OnInit {
   }
 
   onDelete(productId: string) {
-    const currentProduct = this.products.find(product => product.id === productId);
+    const selectedProduct = this.products.find(product => product.id === productId);
 
     this.modalService.onOpenModal(
-      `Está seguro de eliminar el producto ${currentProduct?.description}`,
-      () => this.handleDeleteItem(currentProduct?.id || '')
+      `Está seguro de eliminar el producto ${selectedProduct?.description}`,
+      () => this.handleDeleteItem(selectedProduct?.id || '')
     );
   }
 
@@ -135,7 +124,7 @@ export class MainScreenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productsService.setCurrentProduct(undefined);
+    this.productStateService.clearSelectedProduct();
     this.loadData();
   }
 }

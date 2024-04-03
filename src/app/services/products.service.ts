@@ -14,16 +14,6 @@ export class ProductsService {
   
   constructor(private http: HttpClient) { }
 
-  currentProduct : Product | undefined;
-
-  setCurrentProduct(product: Product | undefined) {
-    this.currentProduct = product;
-  }
-
-  getCurrentProduct() {
-    return this.currentProduct;
-  }
-
   getItems(): Observable<any> {
     return this.http.get(this.apiUrl, { headers: this.headers });
   }
@@ -38,5 +28,9 @@ export class ProductsService {
 
   deleteItem(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}?id=${id}`, { headers: this.headers, responseType: 'text' });
+  }
+
+  verifyId(id: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/verification?id=${id}`, { headers: this.headers });
   }
 }

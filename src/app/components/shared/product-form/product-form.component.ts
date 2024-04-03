@@ -2,13 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormID } from 'src/app/types/form';
 import { stringLenghtValidations } from 'src/app/utils/constants';
-import { dateGreaterEqualThanToday, idExists, releaseGreatherOneYearThanRevision, validateUrl } from 'src/app/utils/validation';
-import { IdValidationService } from '../../services/id-validation.service';
-import { ProductsService } from '../../services/products.service';
+// import { dateGreaterEqualThanToday, idExists, releaseGreatherOneYearThanRevision, validateUrl } from 'src/app/utils/validation';
+import { ValidationService } from '../../../services/validation.service';
+import { ProductsService } from '../../../services/products.service';
 import { transformISODate } from 'src/app/utils/helpers';
 import { ScreenMode } from 'src/app/types/screenMode';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../notification/notification.service';
+import { ProductStateService } from 'src/app/services/product-state.service';
 
 @Component({
   selector: 'app-product-form',
@@ -20,10 +21,11 @@ export class ProductFormComponent implements OnInit {
   @Input() screenMode: ScreenMode = 'add';
   constructor(
     private fb: FormBuilder,
-    private idValidationService: IdValidationService,
+    private validationService: ValidationService,
     private productsService: ProductsService,
     private router: Router,
     private notificationService: NotificationService,
+    private productStateService: ProductStateService,
   ) {
     this.form = this.fb.group({});
   }
@@ -121,8 +123,8 @@ export class ProductFormComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    const currentProduct = this.productsService.getCurrentProduct();
-    const allowIdVerify = this.screenMode === 'add' && [idExists(this.idValidationService, this.screenMode)];
+    const selectedProduct = this.productStateService.getSelectedProduct();
+    const allowIdVerify = this.screenMode === 'add' && [this.validationService.idExists(this.screenMode)];
     this.form = this.fb.group({
       id: ['', {
         validators: [
@@ -143,26 +145,26 @@ export class ProductFormComponent implements OnInit {
         Validators.minLength(stringLenghtValidations.description.min),
         Validators.maxLength(stringLenghtValidations.description.max)
       ]],
-      logo: ['', [Validators.required, validateUrl]],
+      logo: ['', [Validators.required, this.validationService.isValidUrl]],
       date_release: ['', [
         Validators.required,
         Validators.minLength(7),
-        dateGreaterEqualThanToday
+        this.validationService.dateGreaterEqualThanToday
       ]],
       date_revision: ['', [Validators.required, Validators.minLength(7)]],
     },
     { 
-      validator: releaseGreatherOneYearThanRevision
+      validator: this.validationService.releaseGreatherOneYearThanRevision
     });
 
-    if (currentProduct && this.screenMode === 'update') {
+    if (selectedProduct && this.screenMode === 'update') {
       this.form.setValue({
-        id: currentProduct.id,
-        name: currentProduct.name,
-        description: currentProduct.description,
-        logo: currentProduct.logo,
-        date_release: transformISODate(currentProduct.date_release),
-        date_revision: transformISODate(currentProduct.date_revision),
+        id: selectedProduct.id,
+        name: selectedProduct.name,
+        description: selectedProduct.description,
+        logo: selectedProduct.logo,
+        date_release: transformISODate(selectedProduct.date_release),
+        date_revision: transformISODate(selectedProduct.date_revision),
       })
     }
     

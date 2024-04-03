@@ -1,6 +1,7 @@
 <div class="input-form__container">
     <div class="input-form__label"> {{title}} </div>
     <input
+        [class]="errorMessage ? 'input__error' : 'input__input'"
         type={{type}}
         [value]="value"
         (input)="updateValue($event)"

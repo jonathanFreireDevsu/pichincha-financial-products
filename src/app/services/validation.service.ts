@@ -1,9 +1,20 @@
-import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { IdValidationService } from '../services/id-validation.service';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'environments/environment';
+import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { Observable, catchError, map, of } from 'rxjs';
+import { ProductsService } from './products.service';
 
-export const dateGreaterEqualThanToday =
-(item: FormGroup): ValidationErrors | null => {
+@Injectable({
+  providedIn: 'root'
+})
+export class ValidationService {
+  constructor(
+    private http: HttpClient,
+    private productsService: ProductsService
+    ) { }
+
+  dateGreaterEqualThanToday (item: FormGroup): ValidationErrors | null {
     const dateReleaseControl = item.value;
     if (!dateReleaseControl) {
         return null;
@@ -17,8 +28,7 @@ export const dateGreaterEqualThanToday =
     return null;
 };
 
-export const releaseGreatherOneYearThanRevision =
-(formGroup: FormGroup): ValidationErrors | null => {
+releaseGreatherOneYearThanRevision (formGroup: FormGroup): ValidationErrors | null {
     const dateReleaseControl = formGroup.get('date_release');
     const dateRevisionControl = formGroup.get('date_revision');
 
@@ -38,19 +48,19 @@ export const releaseGreatherOneYearThanRevision =
     return null;
 };
 
-export const  validateUrl = (control: AbstractControl): ValidationErrors | null => {
+isValidUrl (control: AbstractControl): ValidationErrors | null {
   const urlRegex = /^https?:\/\/.+/;
   const valid = urlRegex.test(control.value);
   return valid ? null : { 'invalidUrl': true };
 }
 
-export const idExists = (service: IdValidationService, screenMode: string): ValidationErrors | null => {
+idExists (screenMode: string): ValidationErrors | null {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
     if (screenMode !== 'add' || !control.value) {
       return of(null);
     }
 
-    return service.verifyId(control.value).pipe(
+    return this.productsService.verifyId(control.value).pipe(
       map(exists => {
         return exists ? { idExists: true } : null;
       }),
@@ -58,3 +68,8 @@ export const idExists = (service: IdValidationService, screenMode: string): Vali
     );
   };
 };
+
+
+
+
+}

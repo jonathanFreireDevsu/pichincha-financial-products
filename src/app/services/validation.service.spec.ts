@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpTestingController } from '@angular/common/http/testing';
 import { mockDeclarations } from '../utils/mockDeclarations';
-import { IdValidationService } from './id-validation.service';
+import { ValidationService } from './validation.service';
 
 describe('DataService', () => {
-  let service: IdValidationService;
+  let service: ValidationService;
   let httpTestingController: HttpTestingController;
   let mockExample = {
       "id": "12311",
@@ -18,7 +18,7 @@ describe('DataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule(mockDeclarations);
 
-    service = TestBed.inject(IdValidationService);
+    service = TestBed.inject(ValidationService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 

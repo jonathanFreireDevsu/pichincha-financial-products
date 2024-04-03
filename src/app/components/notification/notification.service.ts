@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core'
-import { NotificationType } from '../types/notiticationType';
+import { NotificationType } from '../../types/notiticationType';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -16,6 +16,6 @@ export class NotificationService {
 
         setTimeout(() => {
             this.text.next('');
-          }, 6000);
+          }, 5000);
     }
 }

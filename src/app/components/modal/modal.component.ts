@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ProductsService } from '../services/products.service';
+import { ProductsService } from '../../services/products.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../notification/notification.service';
 import { ModalService } from './modal.service';

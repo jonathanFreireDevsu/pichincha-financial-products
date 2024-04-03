@@ -4,12 +4,12 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { MainScreenComponent } from "../main-screen/main-screen.component";
-import { AddProductScreenComponent } from "../add-product-screen/add-product-screen.component";
-import { EditProductScreenComponent } from "../edit-product-screen/edit-product-screen.component";
-import { InputFormComponent } from "../common/input-form/input-form.component";
-import { ProductFormComponent } from "../common/product-form/product-form.component";
-import { ModalComponent } from "../modal/modal.component";
+import { MainScreenComponent } from "../screens/main-screen/main-screen.component";
+import { AddProductScreenComponent } from "../screens/add-product-screen/add-product-screen.component";
+import { EditProductScreenComponent } from "../screens/edit-product-screen/edit-product-screen.component";
+import { InputFormComponent } from "../components/shared/product-form/components/input-form/input-form.component";
+import { ProductFormComponent } from "../components/shared/product-form/product-form.component";
+import { ModalComponent } from "../components/modal/modal.component";
 
 export const mockDeclarations = {
 declarations: [
