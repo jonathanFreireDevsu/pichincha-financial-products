@@ -1,6 +1,6 @@
-import { IStringLenghtValidations } from "../types/form";
+import { StringLenghtValidationsType } from "../models/form.types";
 
-export const stringLenghtValidations: IStringLenghtValidations = {
+export const stringLenghtValidations: StringLenghtValidationsType = {
     id: {
         min: 3,
         max: 10

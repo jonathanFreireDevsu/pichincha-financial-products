@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { MainScreenComponent } from "../screens/main-screen/main-screen.component";
-import { AddProductScreenComponent } from "../screens/add-product-screen/add-product-screen.component";
-import { EditProductScreenComponent } from "../screens/edit-product-screen/edit-product-screen.component";
+import { HomeComponent } from "../screens/home/home.component";
+import { AddProductComponent } from "../screens/add-product/add-product.component";
+import { EditProductComponent } from "../screens/edit-product/edit-product.component";
 import { InputFormComponent } from "../components/shared/product-form/components/input-form/input-form.component";
 import { ProductFormComponent } from "../components/shared/product-form/product-form.component";
 import { ModalComponent } from "../components/modal/modal.component";
@@ -14,9 +14,9 @@ import { ModalComponent } from "../components/modal/modal.component";
 export const mockDeclarations = {
 declarations: [
     AppComponent,
-    MainScreenComponent,
-    AddProductScreenComponent,
-    EditProductScreenComponent,
+    HomeComponent,
+    AddProductComponent,
+    EditProductComponent,
     InputFormComponent,
     ProductFormComponent,
     ModalComponent,
@@ -28,9 +28,9 @@ imports: [
     HttpClientModule,
     HttpClientTestingModule,
     RouterModule.forRoot([
-      {path: '', component: MainScreenComponent},
-      {path: 'agregar', component: AddProductScreenComponent},
-      {path: 'editar/:id', component: EditProductScreenComponent},
+      {path: '', component: HomeComponent},
+      {path: 'agregar', component: AddProductComponent},
+      {path: 'editar/:id', component: EditProductComponent},
     ])
   ],
 providers: [],

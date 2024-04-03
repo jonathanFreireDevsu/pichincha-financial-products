@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormID } from 'src/app/types/form';
-import { stringLenghtValidations } from 'src/app/utils/constants';
+import { FormIDType } from 'src/app/models/form.types';
+import { stringLenghtValidations } from 'src/app/constants/string-lenght-validations';
 // import { dateGreaterEqualThanToday, idExists, releaseGreatherOneYearThanRevision, validateUrl } from 'src/app/utils/validation';
 import { ValidationService } from '../../../services/validation.service';
 import { ProductsService } from '../../../services/products.service';
-import { transformISODate } from 'src/app/utils/helpers';
-import { ScreenMode } from 'src/app/types/screenMode';
+import { transformISODate } from 'src/app/utils/format.utils';
+import { ScreenModeType } from 'src/app/models/screen-mode.types';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../notification/notification.service';
 import { ProductStateService } from 'src/app/services/product-state.service';
@@ -18,7 +18,7 @@ import { ProductStateService } from 'src/app/services/product-state.service';
 })
 export class ProductFormComponent implements OnInit {
   form: FormGroup;
-  @Input() screenMode: ScreenMode = 'add';
+  @Input() screenMode: ScreenModeType = 'add';
   constructor(
     private fb: FormBuilder,
     private validationService: ValidationService,
@@ -88,7 +88,7 @@ export class ProductFormComponent implements OnInit {
     }
   }
   
-  getErrorMessage(id: FormID) {
+  getErrorMessage(id: FormIDType) {
     const formControls = this.form.controls;
     const formControlsErrors = formControls[id].errors;
     const formErrors = this.form['errors'] as any;

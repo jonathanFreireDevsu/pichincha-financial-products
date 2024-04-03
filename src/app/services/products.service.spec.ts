@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpTestingController } from '@angular/common/http/testing';
-import { mockDeclarations } from '../utils/mockDeclarations';
+import { mockDeclarations } from '../utils/mock-declarations';
 import { ProductsService } from './products.service';
 
 describe('DataService', () => {

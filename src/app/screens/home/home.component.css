@@ -1,17 +1,17 @@
 
-.main__table-icon {
+.home__table-icon {
     width: 35px;
 }
 
-.main__table-container {
+.home__table-container {
     background-color: #fff;
 }
 
-.main__action-icon {
+.home__action-icon {
     width: 20px;
 }
 
-.main__actions-container {
+.home__actions-container {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -19,11 +19,11 @@
     padding: 10px 0px;
 }
 
-.main__table-title {
+.home__table-title {
     background-color: #f9fafc;
 }
 
-.main__action-options {
+.home__action-options {
     position: relative;
     display: inline-block;
     color: #6d6a6a;
@@ -32,11 +32,11 @@
     user-select: none;
 }
 
-.main__options-content {
+.home__options-content {
     z-index: 2;
     min-width: 130px;
 }
-.main__options-content {
+.home__options-content {
     position: absolute;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -44,17 +44,17 @@
     display: none;
 }
 
-.main__action-options:hover .main__options-content {
+.home__action-options:hover .home__options-content {
     display: block;
 }
 
-.main__action-options .main__options-content span {
+.home__action-options .home__options-content span {
     display: block;
     padding: 8px 12px;
     color: #333;
 }
 
-.main__table-bottom-container {
+.home__table-bottom-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -62,7 +62,7 @@
     padding: 15px 0px 20px 0px;
 }
 
-.main__dropdown-text {
+.home__dropdown-text {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -73,17 +73,17 @@
     
 }
 
-.main__care_down-icon {
+.home__care_down-icon {
     width: 8px;
 }
 
-.main__care-icon {
+.home__care-icon {
     width: 13px;
     color: red;
     cursor: pointer;
 }
 
-.main__change-page {
+.home__change-page {
     width: 30px;
     display: flex;
     justify-content: space-between;

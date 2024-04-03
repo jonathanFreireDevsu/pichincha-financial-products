@@ -1,6 +1,6 @@
 <div class="app-screen">
     <div class="container">
-        <div class="main__actions-container">
+        <div class="home__actions-container">
             <input
                 type="text"
                 (keyup)='onSearch($event)'
@@ -13,9 +13,9 @@
                 Agregar
             </button>
         </div>
-        <div class="main__table-container">
+        <div class="home__table-container">
             <table>
-                <tr class="main__table-title">
+                <tr class="home__table-title">
                     <th>Logo</th>
                     <th>Nombre del producto</th>
                     <th>Descripción</th>
@@ -26,7 +26,7 @@
                 <tr *ngFor='let product of splittedProducts[currPage]'>
                     <td>
                         <img
-                            class="main__table-icon"
+                            class="home__table-icon"
                             src={{product.logo}}
                             (error)="onImageError($event)"
                         />
@@ -36,9 +36,9 @@
                     <td>{{product.date_release && product.date_release.substring(0,10)}}</td>
                     <td>{{product.date_revision && product.date_revision.substring(0,10)}}</td>
                     <td>
-                        <div class="main__action-options">
-                            <img class="main__action-icon" src='./../assets/3dots.svg' />
-                            <div class="main__options-content">
+                        <div class="home__action-options">
+                            <img class="home__action-icon" src='./../assets/3dots.svg' />
+                            <div class="home__options-content">
                               <span (click)="onUpdate(product.id)">Actualizar item</span>
                               <span (click)="onDelete(product.id)">Eliminar item</span>
                             </div>
@@ -47,27 +47,27 @@
                 </tr>
             </table>
         </div>
-        <div class="main__table-bottom-container">
+        <div class="home__table-bottom-container">
             <div>
                 {{products.length || 0}} Resultado{{products.length === 1? '' : 's'}}
             </div>
-            <div class="main__change-page" *ngIf="products.length > itemsPerPage">
+            <div class="home__change-page" *ngIf="products.length > itemsPerPage">
                 <img
-                    class="main__care-icon" src='./../assets/caretLeft.svg'
+                    class="home__care-icon" src='./../assets/caretLeft.svg'
                     (click)='onChangePage(-1)'    
                 />
                 <img
-                    class="main__care-icon"
+                    class="home__care-icon"
                     src='./../assets/caretRight.svg'
                     (click)='onChangePage(1)' 
                 />
             </div>
-            <div class="main__action-options">
-                <div class="main__dropdown-text">
+            <div class="home__action-options">
+                <div class="home__dropdown-text">
                     <span>{{itemsPerPage}}</span>
-                    <img class="main__care_down-icon" src='./../assets/caretDown.svg' />
+                    <img class="home__care_down-icon" src='./../assets/caretDown.svg' />
                 </div>
-                <div class="main__options-content">
+                <div class="home__options-content">
                     <span (click)='onSplitData(5, products)'>5</span>
                     <span (click)='onSplitData(10, products)'>10</span>
                     <span (click)='onSplitData(20, products)'>20</span>

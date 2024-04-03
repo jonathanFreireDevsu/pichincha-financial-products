@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { mockDeclarations } from '../../utils/mockDeclarations';
+import { mockDeclarations } from '../../utils/mock-declarations';
 import { ModalComponent } from './modal.component';
 
 describe('AppComponent', () => {

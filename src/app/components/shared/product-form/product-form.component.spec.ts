@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { mockDeclarations } from '../../../utils/mockDeclarations';
+import { mockDeclarations } from '../../../utils/mock-declarations';
 import { ProductFormComponent } from './product-form.component';
 
 describe('AppComponent', () => {

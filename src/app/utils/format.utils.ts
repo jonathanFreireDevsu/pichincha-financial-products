@@ -1,4 +1,3 @@
-
 export const transformISODate = (isoDateString: string) => {
     const date = new Date(isoDateString);
     const year = date.getFullYear();

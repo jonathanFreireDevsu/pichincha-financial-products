@@ -2,24 +2,23 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { MainScreenComponent } from './screens/main-screen/main-screen.component';
+import { HomeComponent } from './screens/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AddProductScreenComponent } from './screens/add-product-screen/add-product-screen.component';
-import { EditProductScreenComponent } from './screens/edit-product-screen/edit-product-screen.component';
+import { AddProductComponent } from './screens/add-product/add-product.component';
+import { EditProductComponent } from './screens/edit-product/edit-product.component';
 import { InputFormComponent } from './components/shared/product-form/components/input-form/input-form.component';
 import { ProductFormComponent } from './components/shared/product-form/product-form.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { RouterModule } from '@angular/router';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainScreenComponent,
-    AddProductScreenComponent,
-    EditProductScreenComponent,
+    HomeComponent,
+    AddProductComponent,
+    EditProductComponent,
     InputFormComponent,
     ProductFormComponent,
     ModalComponent,
@@ -31,12 +30,11 @@ import { NotificationComponent } from './components/notification/notification.co
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path: '', component: MainScreenComponent},
-      {path: 'agregar', component: AddProductScreenComponent},
-      {path: 'editar/:id', component: EditProductScreenComponent},
+      {path: '', component: HomeComponent},
+      {path: 'agregar', component: AddProductComponent},
+      {path: 'editar/:id', component: EditProductComponent},
     ])
   ],
-  // exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

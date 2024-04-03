@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../types/products';
+import { Product } from '../../models/product.model';
 import { Router } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { NotificationService } from '../../components/notification/notification.service';
@@ -7,11 +7,11 @@ import { ModalService } from '../../components/modal/modal.service';
 import { ProductStateService } from 'src/app/services/product-state.service';
 
 @Component({
-  selector: 'app-main-screen',
-  templateUrl: './main-screen.component.html',
-  styleUrls: ['./main-screen.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class MainScreenComponent implements OnInit {
+export class HomeComponent implements OnInit {
   constructor (
     private router: Router,
     private productsService: ProductsService,

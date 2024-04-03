@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product } from '../types/products';
+import { Product } from '../models/product.model';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -14,19 +14,19 @@ export class ProductsService {
   
   constructor(private http: HttpClient) { }
 
-  getItems(): Observable<any> {
-    return this.http.get(this.apiUrl, { headers: this.headers });
+  getItems(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl, { headers: this.headers });
   }
 
-  addItem(item: any): Observable<any> {
-    return this.http.post(this.apiUrl, item, { headers: this.headers });
+  addItem(item: Product): Observable<Product> {
+    return this.http.post<Product>(this.apiUrl, item, { headers: this.headers });
   }
 
-  updateItem(item: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}`, item, { headers: this.headers });
+  updateItem(item: Product): Observable<Product> {
+    return this.http.put<Product>(`${this.apiUrl}`, item, { headers: this.headers });
   }
 
-  deleteItem(id: string): Observable<any> {
+  deleteItem(id: string): Observable<string> {
     return this.http.delete(`${this.apiUrl}?id=${id}`, { headers: this.headers, responseType: 'text' });
   }
 

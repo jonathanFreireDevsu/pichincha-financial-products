@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'environments/environment';
 import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { Observable, catchError, map, of } from 'rxjs';
 import { ProductsService } from './products.service';
@@ -10,7 +8,6 @@ import { ProductsService } from './products.service';
 })
 export class ValidationService {
   constructor(
-    private http: HttpClient,
     private productsService: ProductsService
     ) { }
 

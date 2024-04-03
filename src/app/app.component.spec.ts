@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { mockDeclarations } from './utils/mockDeclarations';
+import { mockDeclarations } from './utils/mock-declarations';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule(mockDeclarations));
