@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { mockDeclarations } from '../../../utils/mock-declarations';
 import { ProductFormComponent } from './product-form.component';
 
-describe('AppComponent', () => {
+describe('Product form component', () => {
   beforeEach(() => TestBed.configureTestingModule(mockDeclarations));
 
   it('should create the app', () => {

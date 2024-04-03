@@ -134,7 +134,7 @@ export class ProductFormService {
             },
             (_) => {
                 this.notificationService.showNotification(
-                'Hubo un error al intentar añadir el producto',
+                'Hubo un error al intentar actualizar el producto',
                 'error'
                 );
             }

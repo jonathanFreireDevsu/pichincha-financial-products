@@ -10,6 +10,9 @@ import { EditProductComponent } from "../screens/edit-product/edit-product.compo
 import { InputFormComponent } from "../components/shared/product-form/components/input-form/input-form.component";
 import { ProductFormComponent } from "../components/shared/product-form/product-form.component";
 import { ModalComponent } from "../components/modal/modal.component";
+import { TableComponent } from "../screens/home/components/table/table.component";
+import { NotificationComponent } from "../components/notification/notification.component";
+import { ProductActionsComponent } from "../screens/home/components/product-actions/product-actions.component";
 
 export const mockDeclarations = {
 declarations: [
@@ -20,6 +23,9 @@ declarations: [
     InputFormComponent,
     ProductFormComponent,
     ModalComponent,
+    TableComponent,
+    NotificationComponent,
+    ProductActionsComponent
 ],
 imports: [
     BrowserModule,

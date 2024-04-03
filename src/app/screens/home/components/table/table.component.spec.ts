@@ -1,21 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
+import { mockDeclarations } from 'src/app/utils/mock-declarations';
 import { TableComponent } from './table.component';
 
-describe('TableComponent', () => {
-  let component: TableComponent;
-  let fixture: ComponentFixture<TableComponent>;
+describe('AppComponent', () => {
+  beforeEach(() => TestBed.configureTestingModule(mockDeclarations));
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [TableComponent]
-    });
-    fixture = TestBed.createComponent(TableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(TableComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
   });
 });

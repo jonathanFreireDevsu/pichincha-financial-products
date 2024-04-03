@@ -66,7 +66,4 @@ idExists (screenMode: string): ValidationErrors | null {
   };
 };
 
-
-
-
 }
