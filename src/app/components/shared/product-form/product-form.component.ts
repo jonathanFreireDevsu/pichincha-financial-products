@@ -1,15 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormIDType } from 'src/app/models/form.types';
-import { stringLenghtValidations } from 'src/app/constants/string-lenght-validations';
-// import { dateGreaterEqualThanToday, idExists, releaseGreatherOneYearThanRevision, validateUrl } from 'src/app/utils/validation';
-import { ValidationService } from '../../../services/validation.service';
-import { ProductsService } from '../../../services/products.service';
-import { transformISODate } from 'src/app/utils/format.utils';
 import { ScreenModeType } from 'src/app/models/screen-mode.types';
-import { Router } from '@angular/router';
 import { NotificationService } from '../../notification/notification.service';
-import { ProductStateService } from 'src/app/services/product-state.service';
 import { ProductFormService } from './product-form.service';
 
 @Component({
@@ -22,11 +15,7 @@ export class ProductFormComponent implements OnInit {
   @Input() screenMode: ScreenModeType = 'add';
   constructor(
     private fb: FormBuilder,
-    private validationService: ValidationService,
-    private productsService: ProductsService,
-    private router: Router,
     private notificationService: NotificationService,
-    private productStateService: ProductStateService,
     private productFormService: ProductFormService,
   ) {
     this.form = this.fb.group({});

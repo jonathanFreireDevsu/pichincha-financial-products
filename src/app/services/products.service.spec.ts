@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpTestingController } from '@angular/common/http/testing';
 import { mockDeclarations } from '../utils/mock-declarations';
 import { ProductsService } from './products.service';
+import { Product } from '../models/product.model';
 
 describe('DataService', () => {
   let service: ProductsService;
@@ -31,7 +32,7 @@ describe('DataService', () => {
   });
 
   it('should retrieve data via GET', () => {
-    const mockData: any[] = [mockExample];
+    const mockData: Product[] = [mockExample];
 
     service.getItems().subscribe((data) => {
       expect(data).toEqual(mockData);
@@ -43,7 +44,7 @@ describe('DataService', () => {
   });
 
   it('should add data via POST', () => {
-    const newItem: any = mockExample;
+    const newItem: Product = mockExample;
 
     service.addItem(newItem).subscribe((data) => {
       expect(data).toEqual(newItem);
@@ -55,7 +56,7 @@ describe('DataService', () => {
   });
 
   it('should update data via PUT', () => {
-    const updatedItem: any = mockExample;
+    const updatedItem: Product = mockExample;
 
     service.updateItem(updatedItem).subscribe((data) => {
       expect(data).toEqual(updatedItem);
@@ -73,5 +74,18 @@ describe('DataService', () => {
 
     const req = httpTestingController.expectOne(`${service['apiUrl']}?id=${idToDelete}`);
     expect(req.request.method).toBe('DELETE');
+  });
+
+  it('should validate data via GET', () => {
+    const idToValidate = '1';
+    const verificationResponse = true;
+
+    service.verifyId(idToValidate).subscribe((data) => {
+      expect(data).toEqual(verificationResponse);
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}?id=${idToValidate}`);
+    expect(req.request.method).toBe('GET');
+    req.flush(verificationResponse);
   });
 });

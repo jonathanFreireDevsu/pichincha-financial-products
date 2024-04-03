@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
   onSearch (event: any) {
     const value = event.target.value;
     this.homeService.handleSearch(value);
-    // this.onSplitData(this.itemsPerPage, prevResult);
   }
 
 
