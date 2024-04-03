@@ -12,6 +12,9 @@ import { ProductFormComponent } from './components/shared/product-form/product-f
 import { ModalComponent } from './components/modal/modal.component';
 import { RouterModule } from '@angular/router';
 import { NotificationComponent } from './components/notification/notification.component';
+import { TableComponent } from './screens/home/components/table/table.component';
+import { ProductActionsComponent } from './screens/home/components/product-actions/product-actions.component';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +26,8 @@ import { NotificationComponent } from './components/notification/notification.co
     ProductFormComponent,
     ModalComponent,
     NotificationComponent,
+    TableComponent,
+    ProductActionsComponent,
   ],
   imports: [
     BrowserModule,

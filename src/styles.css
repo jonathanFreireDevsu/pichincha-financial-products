@@ -102,3 +102,39 @@ input {
     padding: 30px;
 
 }
+
+
+.dropdown__options {
+    position: relative;
+    display: inline-block;
+    color: #6d6a6a;
+    padding: 8px 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.dropdown__options-content {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: none;
+}
+
+.dropdown__options:hover .dropdown__options-content {
+    display: block;
+}
+
+.dropdown__options .dropdown__options-content span {
+    display: block;
+    padding: 8px 12px;
+    color: #333;
+}
+
+.home__actions-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+}

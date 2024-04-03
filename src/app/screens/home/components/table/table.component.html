@@ -1,0 +1,55 @@
+<div class="home__table-container">
+    <table>
+        <tr class="home__table-title">
+            <th>Logo</th>
+            <th>Nombre del producto</th>
+            <th>Descripción</th>
+            <th>Fecha de liberación</th>
+            <th>Fecha de reestructuración</th>
+            <th></th>
+        </tr>
+        <tr *ngFor='let product of splittedData[currPage]'>
+            <td>
+                <img
+                    class="home__table-icon"
+                    src={{product.logo}}
+                    (error)="onImageError($event)"
+                />
+            </td>
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.date_release && product.date_release.substring(0,10)}}</td>
+            <td>{{product.date_revision && product.date_revision.substring(0,10)}}</td>
+            <td>
+                <app-product-actions [product]="product" />
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="home__table-bottom-container">
+    <div>
+        {{products.length || 0}} Resultado{{products.length === 1? '' : 's'}}
+    </div>
+    <div class="home__change-page" *ngIf="products.length > itemsPerPage">
+        <img
+            class="home__care-icon" src='./../assets/caretLeft.svg'
+            (click)='onChangePage(-1)'    
+        />
+        <img
+            class="home__care-icon"
+            src='./../assets/caretRight.svg'
+            (click)='onChangePage(1)' 
+        />
+    </div>
+    <div class="dropdown__options">
+        <div class="home__dropdown-text">
+            <span>{{itemsPerPage}}</span>
+            <img class="home__care_down-icon" src='./../assets/caretDown.svg' />
+        </div>
+        <div class="dropdown__options-content">
+            <span (click)='onSplitData(5, products)'>5</span>
+            <span (click)='onSplitData(10, products)'>10</span>
+            <span (click)='onSplitData(20, products)'>20</span>
+        </div>
+    </div>
+</div>

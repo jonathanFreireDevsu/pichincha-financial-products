@@ -1,0 +1,46 @@
+.home__table-container {
+    background-color: #fff;
+}
+
+.home__table-title {
+    background-color: #f9fafc;
+}
+
+.home__table-icon {
+    width: 35px;
+}
+
+.home__table-bottom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 0px 20px 0px;
+}
+
+.home__dropdown-text {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #76767a;
+    border-radius: 5px;
+    width: 40px;
+    padding: 5px 0px;
+    
+}
+
+.home__care_down-icon {
+    width: 8px;
+}
+
+.home__care-icon {
+    width: 13px;
+    color: red;
+    cursor: pointer;
+}
+
+.home__change-page {
+    width: 30px;
+    display: flex;
+    justify-content: space-between;
+}
