@@ -10,6 +10,7 @@ import { ScreenModeType } from 'src/app/models/screen-mode.types';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../notification/notification.service';
 import { ProductStateService } from 'src/app/services/product-state.service';
+import { ProductFormService } from './product-form.service';
 
 @Component({
   selector: 'app-product-form',
@@ -26,6 +27,7 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     private notificationService: NotificationService,
     private productStateService: ProductStateService,
+    private productFormService: ProductFormService,
   ) {
     this.form = this.fb.group({});
   }
@@ -36,37 +38,9 @@ export class ProductFormComponent implements OnInit {
     if (this.form.valid) {
       const data = this.form.value;
       if (this.screenMode === 'update') {
-        this.productsService.updateItem(data).subscribe(
-          (_) => {
-            this.router.navigate([''])
-            this.notificationService.showNotification(
-              'Se ha actualizado el producto con éxito',
-              'done'
-            );
-          },
-          (_) => {
-            this.notificationService.showNotification(
-              'Hubo un error al intentar añadir el producto',
-              'error'
-            );
-          }
-        );
+        this.productFormService.handleSubmitUpdate(data);
       } else {
-        this.productsService.addItem(data).subscribe(
-          (_) => {
-            this.router.navigate([''])
-            this.notificationService.showNotification(
-              'Se ha añadido el producto con éxito',
-              'done'
-            );
-          },
-          (_) => {
-            this.notificationService.showNotification(
-              'Hubo un error al intentar añadir el producto',
-              'error'
-            );
-          }
-        );
+        this.productFormService.handleSubmitAdd(data);
       }
     } else {
       this.notificationService.showNotification('Corrige todos los campos', 'error');
@@ -87,86 +61,15 @@ export class ProductFormComponent implements OnInit {
       })
     }
   }
-  
+
   getErrorMessage(id: FormIDType) {
-    const formControls = this.form.controls;
-    const formControlsErrors = formControls[id].errors;
-    const formErrors = this.form['errors'] as any;
-    if (formControlsErrors) {
-      if (formControls[id].dirty || formControls[id].touched) {
-        if (formControlsErrors['required']) {
-          return 'El campo es requerido';
-        }
-        if (formControlsErrors['minlength']) {
-          return `Debe tener al menos ${stringLenghtValidations[id].min} caracteres`;
-        }
-        if (formControlsErrors['maxlength']) {
-          return `Debe tener como máximo ${stringLenghtValidations[id].max} caracteres`;
-        }
-        if (formControlsErrors['dateGreaterEqualThanToday']) {
-          return 'Debe ser mayor o igual a la fecha actual';
-        }
-        if (formControlsErrors['idExists']) {
-          return 'Este ID no está disponible';
-        }
-        if (formControlsErrors['invalidUrl']) {
-          return 'URL no válido';
-        }
-      }
-    }
-    if (formErrors) {
-      if (formErrors?.releaseGreatherOneYearThanRevision && id === 'date_revision') {
-        return 'Debe ser un año mayor a Fecha liberación';
-      }
-    }
-    return '';
+    return this.productFormService.getErrorMessage(
+      this.form,
+      id
+    );
   }
   
   ngOnInit(): void {
-    const selectedProduct = this.productStateService.getSelectedProduct();
-    const allowIdVerify = this.screenMode === 'add' && [this.validationService.idExists(this.screenMode)];
-    this.form = this.fb.group({
-      id: ['', {
-        validators: [
-          Validators.required,
-          Validators.minLength(stringLenghtValidations.id.min),
-          Validators.maxLength(stringLenghtValidations.id.max)
-        ], 
-        asyncValidators: allowIdVerify, 
-        updateOn: 'blur' 
-      }],
-      name: ['', [
-        Validators.required,
-        Validators.minLength(stringLenghtValidations.name.min),
-        Validators.maxLength(stringLenghtValidations.name.max)
-      ]],
-      description: ['', [
-        Validators.required,
-        Validators.minLength(stringLenghtValidations.description.min),
-        Validators.maxLength(stringLenghtValidations.description.max)
-      ]],
-      logo: ['', [Validators.required, this.validationService.isValidUrl]],
-      date_release: ['', [
-        Validators.required,
-        Validators.minLength(7),
-        this.validationService.dateGreaterEqualThanToday
-      ]],
-      date_revision: ['', [Validators.required, Validators.minLength(7)]],
-    },
-    { 
-      validator: this.validationService.releaseGreatherOneYearThanRevision
-    });
-
-    if (selectedProduct && this.screenMode === 'update') {
-      this.form.setValue({
-        id: selectedProduct.id,
-        name: selectedProduct.name,
-        description: selectedProduct.description,
-        logo: selectedProduct.logo,
-        date_release: transformISODate(selectedProduct.date_release),
-        date_revision: transformISODate(selectedProduct.date_revision),
-      })
-    }
-    
+    this.form = this.productFormService.populateForm(this.screenMode);
   }
 }
