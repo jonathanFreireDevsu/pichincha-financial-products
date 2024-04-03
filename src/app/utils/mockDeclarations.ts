@@ -9,7 +9,7 @@ import { AddProductScreenComponent } from "../add-product-screen/add-product-scr
 import { EditProductScreenComponent } from "../edit-product-screen/edit-product-screen.component";
 import { InputFormComponent } from "../common/input-form/input-form.component";
 import { ProductFormComponent } from "../common/product-form/product-form.component";
-import { ConfirmModalComponent } from "../confirmModal/confirmModal.component";
+import { ModalComponent } from "../modal/modal.component";
 
 export const mockDeclarations = {
 declarations: [
@@ -19,7 +19,7 @@ declarations: [
     EditProductScreenComponent,
     InputFormComponent,
     ProductFormComponent,
-    ConfirmModalComponent,
+    ModalComponent,
 ],
 imports: [
     BrowserModule,

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../types/products';
 import { Router } from '@angular/router';
 import { ProductsService } from '../services/products.service';
-import { IConfirmModal } from '../types/modal';
+import { IModal } from '../types/modal';
+import { NotificationService } from '../notification/notification.service';
+import { ModalService } from '../modal/modal.service';
 
 @Component({
   selector: 'app-main-screen',
@@ -13,6 +15,8 @@ export class MainScreenComponent implements OnInit {
   constructor (
     private router: Router,
     private productsService: ProductsService,
+    private notificationService: NotificationService,
+    private modalService: ModalService
   ) {
 
   }
@@ -22,18 +26,18 @@ export class MainScreenComponent implements OnInit {
   itemsPerPage = 5
   currPage = 0
 
-  confirmModalData : IConfirmModal = {
-    modalVisible: false,
-    modalText: '',
-    modalId: '',
-  }
+  // confirmModalData : IModal = {
+  //   modalVisible: false,
+  //   modalText: '',
+  //   modalId: '',
+  // }
 
-  handleModalVisibility (value: boolean) {
-    this.confirmModalData = {
-      ...this.confirmModalData,
-      modalVisible: value,
-    }
-  }
+  // handleModalVisibility (value: boolean) {
+  //   this.confirmModalData = {
+  //     ...this.confirmModalData,
+  //     modalVisible: value,
+  //   }
+  // }
   onImageError(event: any) {
     event.target.src = './../assets/notAvailable.png';
   }
@@ -47,15 +51,35 @@ export class MainScreenComponent implements OnInit {
     this.router.navigate(['editar/', productId])
   }
 
+  handleDeleteItem(productId: string) {
+    this.productsService.deleteItem(productId).subscribe(
+      (_) => {
+        this.notificationService.showNotification(
+          'El producto se ha eliminado correctamente',
+          'done'
+        );
+        this.loadData();
+        this.modalService.onCloseModal();
+      },
+      (_) => {
+        this.notificationService.showNotification(
+          'Hubo un error',
+          'error'
+        );
+      }
+    );
+  }
+
   onDelete(productId: string) {
     const currentProduct = this.products.find(product => product.id === productId);
-    this.productsService.setCurrentProduct(currentProduct);
-    this.confirmModalData = {
-      modalVisible: true,
-      modalText: currentProduct?.name || '',
-      modalId: currentProduct?.id || '',
-    }
+
+    this.modalService.onOpenModal(
+      `Está seguro de eliminar el producto ${currentProduct?.description}`,
+      () => this.handleDeleteItem(currentProduct?.id || '')
+    );
   }
+
+
 
   onChangePage(value: number) {
     const tempPage = this.currPage + value;
@@ -101,8 +125,11 @@ export class MainScreenComponent implements OnInit {
         this.products = data;
         this.onSplitData(this.itemsPerPage, data)
       },
-      (error) => {
-        console.error('Hubo un error', error);
+      (_) => {
+        this.notificationService.showNotification(
+          'Hubo un error, no se pudo obtener la data',
+          'error'
+        );
       }
     );
   }

@@ -38,7 +38,13 @@ export const releaseGreatherOneYearThanRevision =
     return null;
 };
 
-export const idExists = (service: IdValidationService, screenMode: string): ValidatorFn => {
+export const  validateUrl = (control: AbstractControl): ValidationErrors | null => {
+  const urlRegex = /^https?:\/\/.+/;
+  const valid = urlRegex.test(control.value);
+  return valid ? null : { 'invalidUrl': true };
+}
+
+export const idExists = (service: IdValidationService, screenMode: string): ValidationErrors | null => {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
     if (screenMode !== 'add' || !control.value) {
       return of(null);

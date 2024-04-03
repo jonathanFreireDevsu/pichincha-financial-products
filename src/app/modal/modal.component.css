@@ -1,4 +1,4 @@
-.confirm-modal {
+.modal {
     width: 100vw;
     height: 100%;
     position: absolute;
@@ -9,14 +9,14 @@
     overflow: hidden;
 }
 
-.confirm-modal__card {
+.modal__card {
     position: absolute;
     width: 50%;
     top: 25%;
     left: 25%;
 }
 
-.confirm-modal__buttons {
+.modal__buttons {
     width: 100%;
     display: flex;
     justify-content: flex-end;

@@ -2,12 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormID } from 'src/app/types/form';
 import { stringLenghtValidations } from 'src/app/utils/constants';
-import { dateGreaterEqualThanToday, idExists, releaseGreatherOneYearThanRevision } from 'src/app/utils/validation';
+import { dateGreaterEqualThanToday, idExists, releaseGreatherOneYearThanRevision, validateUrl } from 'src/app/utils/validation';
 import { IdValidationService } from '../../services/id-validation.service';
 import { ProductsService } from '../../services/products.service';
 import { transformISODate } from 'src/app/utils/helpers';
 import { ScreenMode } from 'src/app/types/screenMode';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../notification/notification.service';
 
 @Component({
   selector: 'app-product-form',
@@ -22,6 +23,7 @@ export class ProductFormComponent implements OnInit {
     private idValidationService: IdValidationService,
     private productsService: ProductsService,
     private router: Router,
+    private notificationService: NotificationService,
   ) {
     this.form = this.fb.group({});
   }
@@ -35,23 +37,37 @@ export class ProductFormComponent implements OnInit {
         this.productsService.updateItem(data).subscribe(
           (_) => {
             this.router.navigate([''])
+            this.notificationService.showNotification(
+              'Se ha actualizado el producto con éxito',
+              'done'
+            );
           },
-          (error) => {
-            console.error('Hubo un error', error);
+          (_) => {
+            this.notificationService.showNotification(
+              'Hubo un error al intentar añadir el producto',
+              'error'
+            );
           }
         );
       } else {
         this.productsService.addItem(data).subscribe(
           (_) => {
             this.router.navigate([''])
+            this.notificationService.showNotification(
+              'Se ha añadido el producto con éxito',
+              'done'
+            );
           },
-          (error) => {
-            console.error('Hubo un error', error);
+          (_) => {
+            this.notificationService.showNotification(
+              'Hubo un error al intentar añadir el producto',
+              'error'
+            );
           }
         );
       }
     } else {
-      console.log('invalid');
+      this.notificationService.showNotification('Corrige todos los campos', 'error');
     }
   }
 
@@ -91,6 +107,9 @@ export class ProductFormComponent implements OnInit {
         if (formControlsErrors['idExists']) {
           return 'Este ID no está disponible';
         }
+        if (formControlsErrors['invalidUrl']) {
+          return 'URL no válido';
+        }
       }
     }
     if (formErrors) {
@@ -124,7 +143,7 @@ export class ProductFormComponent implements OnInit {
         Validators.minLength(stringLenghtValidations.description.min),
         Validators.maxLength(stringLenghtValidations.description.max)
       ]],
-      logo: ['', [Validators.required]],
+      logo: ['', [Validators.required, validateUrl]],
       date_release: ['', [
         Validators.required,
         Validators.minLength(7),

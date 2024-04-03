@@ -9,9 +9,10 @@ import { AddProductScreenComponent } from './add-product-screen/add-product-scre
 import { EditProductScreenComponent } from './edit-product-screen/edit-product-screen.component';
 import { InputFormComponent } from './common/input-form/input-form.component';
 import { ProductFormComponent } from './common/product-form/product-form.component';
-import { ConfirmModalComponent } from './confirmModal/confirmModal.component';
+import { ModalComponent } from './modal/modal.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
     EditProductScreenComponent,
     InputFormComponent,
     ProductFormComponent,
-    ConfirmModalComponent,
+    ModalComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

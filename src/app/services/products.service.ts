@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../types/products';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  private apiUrl = 'https://tribu-ti-staffing-desarrollo-afangwbmcrhucqfh.z01.azurefd.net/ipf-msa-productosfinancieros/bp/products';
-  private headers = new HttpHeaders().set('authorId', '374');
+  private apiUrl = environment.apiUrl;
+  private authorId = environment.authorId;
+  private headers = new HttpHeaders().set('authorId', this.authorId);
+  
   constructor(private http: HttpClient) { }
 
   currentProduct : Product | undefined;
